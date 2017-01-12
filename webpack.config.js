@@ -12,14 +12,25 @@ const config = {
 
   devServer: {
     inline: true,
+    // historyApiFallback: true,
     port: 8080
   },
-
+  eslint: {
+    emitWarning: true,
+    configfile: './.eslintrc',
+  },
   module: {
+    preLoaders: [
+      {
+      test: /\.jsx?$/,
+      loader: 'eslint?parser=babel-eslint',
+      exclude: /node_modules/,
+       }
+    ],
     loaders: [
         {
           test:/\.jsx?$/,
-          exclude: /node_module/,
+          exclude: /node_modules/,
           loader: 'babel-loader',
 
 
@@ -30,8 +41,16 @@ const config = {
           },
         },
         {
+          test: /\.json$/,
+          loader: 'json-loader',
+        },
+        {
           test: /\.css$/,
           loader: "style-loader!css-loader",
+        },
+        {
+          test: /\.json$/,
+          loader: 'json'
         },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
@@ -43,9 +62,13 @@ const config = {
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.json']
   },
-  // plugins: [
+  plugins: [
+    new webpack.ProvidePlugin({
+    Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
+    fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+  }),
   //   new webpack.DefinePlugin({
   //     'process.env.NODE_ENV': JSON.stringify('production')
   //   }),
@@ -54,7 +77,7 @@ const config = {
   //       warnings: false
   //     }
   //   })
-  // ]
+  ]
 
 };
 
