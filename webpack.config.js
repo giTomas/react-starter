@@ -1,13 +1,13 @@
-const webpack = require('webpack');
-// const path = require('path');
+const webpack = require("webpack");
+const path = require("path");
 
 const config = {
-  entry: './index.js',
+  entry: "./index.js",
 
   output: {
-    path: './',
-    // publicPath:'./',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'dist'),
+    publicPath:"/",
+    filename: "bundle.js"
   },
 
   devServer: {
@@ -17,13 +17,13 @@ const config = {
   },
   eslint: {
     emitWarning: true,
-    configfile: './.eslintrc',
+    configfile: "./.eslintrc",
   },
   module: {
     preLoaders: [
       {
       test: /\.jsx?$/,
-      loader: 'eslint?parser=babel-eslint',
+      loader: "eslint?parser=babel-eslint",
       exclude: /node_modules/,
        }
     ],
@@ -31,18 +31,18 @@ const config = {
         {
           test:/\.jsx?$/,
           exclude: /node_modules/,
-          loader: 'babel-loader',
+          loader: "babel-loader",
 
 
           query: {
             cacheDirectory: true,
-            presets: ['es2015', 'react', 'stage-0', 'stage-1', 'stage-3'],
-            plugins: ['transform-decorators-legacy']
+            presets: ["es2015", "react", "stage-0", "stage-1", "stage-3"],
+            plugins: ["transform-decorators-legacy"]
           },
         },
         {
           test: /\.json$/,
-          loader: 'json-loader',
+          loader: "json-loader",
         },
         {
           test: /\.css$/,
@@ -50,27 +50,27 @@ const config = {
         },
         {
           test: /\.json$/,
-          loader: 'json'
+          loader: "json"
         },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,
           loaders: [
-              'file?hash=sha512&digest=hex&name=[hash].[ext]',
-              'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+              "file?hash=sha512&digest=hex&name=[hash].[ext]",
+              "image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false"
           ]
       },
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ["", ".js", ".jsx", ".json"]
   },
   plugins: [
     new webpack.ProvidePlugin({
-    Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
-    fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+    Promise: "imports?this=>global!exports?global.Promise!es6-promise",
+    fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch",
   }),
   //   new webpack.DefinePlugin({
-  //     'process.env.NODE_ENV': JSON.stringify('production')
+  //     "process.env.NODE_ENV": JSON.stringify("production")
   //   }),
   //   new webpack.optimize.UglifyJsPlugin({
   //     compress: {

@@ -10,7 +10,6 @@ export const capitalizeFirstLetter = str =>
 export const makeTitle = str =>
   (str.charAt(0).toUpperCase() + str.slice(1)).replace(/\-/g, ' ');
 
-
 export const addState = (array, state) =>
   array.map(obj => obj && {...obj, ...state});
 
