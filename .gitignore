@@ -51,5 +51,6 @@ jspm_packages
 
 # react
 *.bundle.js
+main.bundle.js
 bundle.js
 bundle.js.map
