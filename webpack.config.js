@@ -2,67 +2,56 @@ const webpack = require("webpack");
 const path = require("path");
 
 const config = {
+  // context: path
   entry: "./index.js",
 
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.resolve(__dirname, './dist'),
     publicPath:"/",
-    filename: "bundle.js"
+    filename: "[name].bundle.js"
   },
 
   devServer: {
-    inline: true,
+    // inline: true,
     // historyApiFallback: true,
+    contentBase: "/",
     port: 8080
   },
-  eslint: {
-    emitWarning: true,
-    configfile: "./.eslintrc",
-  },
   module: {
-    preLoaders: [
-      {
-      test: /\.jsx?$/,
-      loader: "eslint?parser=babel-eslint",
-      exclude: /node_modules/,
-       }
-    ],
-    loaders: [
+    rules: [
         {
-          test:/\.jsx?$/,
-          exclude: /node_modules/,
-          loader: "babel-loader",
-
-
-          query: {
-            cacheDirectory: true,
-            presets: ["es2015", "react", "stage-0", "stage-1", "stage-3"],
-            plugins: ["transform-decorators-legacy"]
-          },
+          test: /\.jsx?$/,
+          enforce: "pre",
+          exclude: [/node_modules/],
+          use: [{
+            loader: "eslint-loader?parser=babel-eslint",
+            options: {
+              emitWarning: true,
+              configfile: "./.eslintrc"
+          }
+          }]
         },
         {
-          test: /\.json$/,
-          loader: "json-loader",
+          test:/\.jsx?$/,
+          exclude: [/node_modules/],
+          use: [{
+
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true,
+              presets: [["es2015", {"modules": false}], "react", "stage-0", "stage-1", "stage-3"],
+              plugins: ["transform-decorators-legacy"]
+              }
+            }],
         },
         {
           test: /\.css$/,
-          loader: "style-loader!css-loader",
+          use: ["style-loader", "css-loader"],
         },
-        {
-          test: /\.json$/,
-          loader: "json"
-        },
-        {
-          test: /\.(jpe?g|png|gif|svg)$/i,
-          loaders: [
-              "file?hash=sha512&digest=hex&name=[hash].[ext]",
-              "image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false"
-          ]
-      },
     ],
   },
   resolve: {
-    extensions: ["", ".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json"]
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -73,6 +62,7 @@ const config = {
   //     "process.env.NODE_ENV": JSON.stringify("production")
   //   }),
   //   new webpack.optimize.UglifyJsPlugin({
+  //     sourceMap: true
   //     compress: {
   //       warnings: false
   //     }
