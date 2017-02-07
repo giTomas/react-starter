@@ -1,24 +1,24 @@
 const webpack = require("webpack");
 const path = require("path");
 
+const DIST = path.resolve(__dirname, 'dist');
+
 const config = {
   // context: path
   entry: path.resolve(__dirname, 'index.js'),
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: DIST,
     publicPath:"/",
     filename: "[name].bundle.js"
   },
 
   devServer: {
     // historyApiFallback: true,
-    contentBase: path.resolve(__dirname, "/"),
+    contentBase: DIST,
     port: 8080
   },
-  {
-    devtool: "source-map"
-  },
+  devtool: "source-map",
   module: {
     rules: [
         {
