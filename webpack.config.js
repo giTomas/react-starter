@@ -3,19 +3,21 @@ const path = require("path");
 
 const config = {
   // context: path
-  entry: "./index.js",
+  entry: path.resolve(__dirname, 'index.js'),
 
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath:"/",
     filename: "[name].bundle.js"
   },
 
   devServer: {
-    // inline: true,
     // historyApiFallback: true,
-    contentBase: "/",
+    contentBase: path.resolve(__dirname, "/"),
     port: 8080
+  },
+  {
+    devtool: "source-map"
   },
   module: {
     rules: [
@@ -27,7 +29,7 @@ const config = {
             loader: "eslint-loader?parser=babel-eslint",
             options: {
               emitWarning: true,
-              configfile: "./.eslintrc"
+              configfile: path.resolve(__dirname, ".eslintrc")
           }
           }]
         },
@@ -35,23 +37,35 @@ const config = {
           test:/\.jsx?$/,
           exclude: [/node_modules/],
           use: [{
-
             loader: "babel-loader",
             options: {
-              cacheDirectory: true,
-              presets: [["es2015", {"modules": false}], "react", "stage-0", "stage-1", "stage-3"],
+              // cacheDirectory: true,
+              presets: [
+                        ["es2015", {"modules": false}],
+                        "react",
+                        "stage-0",
+                        "stage-1",
+                        "stage-3"
+                        ],
               plugins: ["transform-decorators-legacy"]
               }
             }],
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"],
+          use: [
+                "style-loader",
+                "css-loader"
+               ],
         },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json"],
+    alias: {
+      Helpers: path.resolve(__dirname, 'app/helpers/'),
+      Styles: path.resolve(__dirname, 'app/styles/'),
+    },
   },
   plugins: [
     new webpack.ProvidePlugin({

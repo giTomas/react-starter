@@ -7,6 +7,6 @@ const renderApp = () =>
     render(
       <App />,
       document.getElementById('root'),
-    );
+  );
 
 renderApp();
