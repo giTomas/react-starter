@@ -1,6 +1,5 @@
 const webpack = require("webpack");
 const path = require("path");
-
 const DIST = path.resolve(__dirname, 'dist');
 
 const config = {
@@ -39,7 +38,7 @@ const config = {
           use: [{
             loader: "babel-loader",
             options: {
-              // cacheDirectory: true,
+              cacheDirectory: true,
               presets: [
                         ["es2015", {"modules": false}],
                         "react",
