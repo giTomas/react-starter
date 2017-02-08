@@ -6,7 +6,8 @@
   "repository": "https://github.com/giTomas/react-starter",
   "scripts": {
     "start": "webpack -d && webpack-dev-server --hot",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "jest"
   },
   "author": "Tomas Kosegi",
   "license": "MIT",
