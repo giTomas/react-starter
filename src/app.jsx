@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import Hello from './components/hello';
+// import styled from 'styled-components';
 
 const App = () =>
-  <h1>Hello!</h1>;
+  <Hello>Hello New App!</Hello>;
 
 export default App;

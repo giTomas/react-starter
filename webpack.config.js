@@ -57,13 +57,32 @@ const config = {
                 "css-loader"
                ],
         },
+        {
+          test: /\.woff2?$/,
+          use: [{
+            loader: 'url-loader',
+            options: {
+              limit: 50000,
+              mimetype: 'application/font-woff',
+
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(ttf|svg|eot)$/,
+        loader: 'file-loader',
+        options: {
+          name: './fonts/[hash].[ext]',
+        }
+      },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [".css", ".js", ".jsx", ".json"],
     alias: {
-      Helpers: path.resolve(__dirname, 'app/helpers/'),
-      Styles: path.resolve(__dirname, 'app/styles/'),
+      // Helpers: path.resolve(__dirname, 'app/helpers/'),
+      // Styles: path.resolve(__dirname, 'app/styles/'),
     },
   },
   plugins: [

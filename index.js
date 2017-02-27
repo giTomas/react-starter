@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import 'typeface-istok-web/index.css';
 import App from './src/app';
 import './src/assets/css/reset.css';
 
