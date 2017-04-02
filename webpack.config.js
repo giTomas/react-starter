@@ -1,11 +1,24 @@
-const webpack = require("webpack");
+const ProvidePlugin = require("webpack/lib/ProvidePlugin");
 const path = require("path");
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+// const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const DIST = path.resolve(__dirname, 'dist');
 
 const config = {
   // context: path
-  entry: path.resolve(__dirname, 'index.js'),
-
+  entry: {
+    vendor: [
+      "react",
+      "react-dom",
+      "typeface-istok-web",
+      "es6-promise",
+      "whatwg-fetch",
+      "react-router-dom",
+      "styled-components",
+      "rambda",
+    ],
+    main: path.resolve(__dirname, 'index.js'),
+  },
   output: {
     path: DIST,
     publicPath:"/",
@@ -13,7 +26,7 @@ const config = {
   },
 
   devServer: {
-    // historyApiFallback: true,
+    historyApiFallback: true,
     contentBase: DIST,
     port: 8080
   },
@@ -86,9 +99,13 @@ const config = {
     },
   },
   plugins: [
-    new webpack.ProvidePlugin({
+    new ProvidePlugin({
     Promise: "imports-loader?this=>global!exports-loader?global.Promise!es6-promise",
     fetch: "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch",
+  }),
+  new CommonsChunkPlugin({
+    name: "vendor",
+    filename: "vendor.bundle.js",
   }),
   //   new webpack.DefinePlugin({
   //     "process.env.NODE_ENV": JSON.stringify("production")
