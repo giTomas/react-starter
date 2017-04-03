@@ -2,7 +2,7 @@ const ProvidePlugin = require("webpack/lib/ProvidePlugin");
 const DefinePlugin = require("webpack/lib/DefinePlugin");
 const path = require("path");
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const DIST = path.resolve(__dirname, 'dist');
 
 const config = {
@@ -110,18 +110,18 @@ const config = {
       filename: "vendor.bundle.js",
       minChunks: ({ resource }) => /node_modules/.test(resource),
   }),
-    // new DefinePlugin({
-    //   "process.env.NODE_ENV": JSON.stringify("production")
-    // }),
-    // new UglifyJsPlugin({
-    //   sourceMap: true,
-    //   beautify: false,
-    //   mangle: false,
-    //   comments: false,
-    //   compress: {
-    //     warnings: false,
-    //   }
-    // })
+    new DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    }),
+    new UglifyJsPlugin({
+      sourceMap: true,
+      beautify: false,
+      mangle: false,
+      comments: false,
+      compress: {
+        warnings: false,
+      }
+    })
   ]
 
 };
