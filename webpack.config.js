@@ -1,28 +1,20 @@
 const ProvidePlugin = require("webpack/lib/ProvidePlugin");
+const DefinePlugin = require("webpack/lib/DefinePlugin");
 const path = require("path");
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-// const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const DIST = path.resolve(__dirname, 'dist');
 
 const config = {
   // context: path
   entry: {
-    vendor: [
-      "react",
-      "react-dom",
-      "typeface-istok-web",
-      "es6-promise",
-      "whatwg-fetch",
-      "react-router-dom",
-      "styled-components",
-      "rambda",
-    ],
     main: path.resolve(__dirname, 'index.js'),
   },
   output: {
     path: DIST,
     publicPath:"/",
-    filename: "[name].bundle.js"
+    filename: "[name].bundle.js",
+    // chunkFilename: '[name]-[chunkhash].js'
   },
 
   devServer: {
@@ -100,22 +92,26 @@ const config = {
   },
   plugins: [
     new ProvidePlugin({
-    Promise: "imports-loader?this=>global!exports-loader?global.Promise!es6-promise",
-    fetch: "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch",
+      Promise: "imports-loader?this=>global!exports-loader?global.Promise!es6-promise",
+      fetch: "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch",
   }),
-  new CommonsChunkPlugin({
-    name: "vendor",
-    filename: "vendor.bundle.js",
+    new CommonsChunkPlugin({
+      name: "vendor",
+      filename: "vendor.bundle.js",
+      minChunks: ({ resource }) => /node_modules/.test(resource),
   }),
-  //   new webpack.DefinePlugin({
-  //     "process.env.NODE_ENV": JSON.stringify("production")
-  //   }),
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     sourceMap: true
-  //     compress: {
-  //       warnings: false
-  //     }
-  //   })
+    // new DefinePlugin({
+    //   "process.env.NODE_ENV": JSON.stringify("production")
+    // }),
+    // new UglifyJsPlugin({
+    //   sourceMap: true,
+    //   beautify: false,
+    //   mangle: false,
+    //   comments: false,
+    //   compress: {
+    //     warnings: false,
+    //   }
+    // })
   ]
 
 };
