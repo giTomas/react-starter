@@ -100,6 +100,7 @@ const config = {
       filename: "vendor.bundle.js",
       minChunks: ({ resource }) => /node_modules/.test(resource),
   }),
+<<<<<<< HEAD
     // new DefinePlugin({
     //   "process.env.NODE_ENV": JSON.stringify("production")
     // }),
@@ -112,6 +113,20 @@ const config = {
     //     warnings: false,
     //   }
     // })
+=======
+    new DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    }),
+    new UglifyJsPlugin({
+      sourceMap: true,
+      beautify: false,
+      mangle: false,
+      comments: false,
+      compress: {
+        warnings: false,
+      }
+    })
+>>>>>>> cc3156fef0af86bdd780166043abdb2c2c6567ec
   ]
 
 };

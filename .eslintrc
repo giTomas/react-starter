@@ -14,7 +14,7 @@
    "react"
  ],
  "rules": {
-    # "linebreak-style": "off",
+    "linebreak-style": "off",
     # "prefer-template": "off",
     # "func-call-spacing": "off",
     # "padded-block": "off",
