@@ -50,11 +50,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-test-renderer": "^15.4.2",
     "style-loader": "^0.13.2",
-<<<<<<< HEAD
     "uglifyjs-webpack-plugin": "^0.4.1",
-=======
-    "uglifyjs-webpack-plugin": "^0.4.0",
->>>>>>> cc3156fef0af86bdd780166043abdb2c2c6567ec
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.2.1"
