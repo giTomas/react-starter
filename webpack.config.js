@@ -8,16 +8,6 @@ const DIST = path.resolve(__dirname, 'dist');
 const config = {
   // context: path
   entry: {
-    // vendor: [
-    //   "react",
-    //   "react-dom",
-    //   "typeface-istok-web",
-    //   "es6-promise",
-    //   "whatwg-fetch",
-    //   "react-router-dom",
-    //   "styled-components",
-    //   // "rambda",
-    // ],
     main: path.resolve(__dirname, 'index.js'),
   },
   output: {
