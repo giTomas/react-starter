@@ -46,12 +46,17 @@ const config = {
               cacheDirectory: true,
               presets: [
                         ["es2015", {"modules": false}],
+                        "es2017",
                         "react",
                         "stage-0",
                         "stage-1",
                         "stage-3"
                         ],
-              plugins: ["transform-decorators-legacy"]
+              plugins: [
+                "transform-decorators-legacy",
+                "transform-runtime",
+                "babel-plugin-transform-es2015-modules-commonjs",
+              ]
               }
             }],
         },
