@@ -20,6 +20,7 @@
     "react-router-dom": "^4.1.1",
     "styled-components": "^1.4.6",
     "typeface-istok-web": "0.0.22",
+    "webpack": "^2.6.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
@@ -42,7 +43,7 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "exports-loader": "^0.6.4",
